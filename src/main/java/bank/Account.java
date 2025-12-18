@@ -39,5 +39,8 @@ public Account(int id, String type, double balance){
     this.balance = balance;
   }
   
+public void deposit(double amount){}
 
+public void withdraw(double amount) {
+}
 }
