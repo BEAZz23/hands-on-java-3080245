@@ -8,11 +8,12 @@ public class Account {
   private String type;
   private double balance;
 
-public Account(int id, String type,double balance){
+public Account(int id, String type, double balance){
   setId(id);
   setType(type);
   setBalance(balance);
 }
+
 
   public int getId() {
     return this.id;
@@ -37,5 +38,6 @@ public Account(int id, String type,double balance){
   public void setBalance(double balance) {
     this.balance = balance;
   }
+  
 
 }
