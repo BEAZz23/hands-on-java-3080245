@@ -18,5 +18,6 @@ else throw new LoginException("Password errata");
 
   public static void logout(Customer customer){
     customer.setAuthenticated(false);
+    System.out.println("Logout effettuato con successo");
   }
 }
