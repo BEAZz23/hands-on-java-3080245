@@ -1,6 +1,6 @@
 package bank;
 
-
+import bank.exceptions.AmountException;
 
 public class Account {
 
@@ -39,8 +39,28 @@ public Account(int id, String type, double balance){
     this.balance = balance;
   }
   
-public void deposit(double amount){}
+public void deposit(double amount) throws AmountException {
+  if(amount< 1){
+    throw new AmountException("Il minimo deposito è 1.00");
+ } 
+ else{
+  double newBalance=amount + balance;
+  setBalance(newBalance);
+  DataSource.updateAccountBalance(id, newBalance);
+ }
 
-public void withdraw(double amount) {
+}
+
+public void withdraw(double amount) throws AmountException {
+  if (amount < 1) {
+    throw new AmountException("Il minimo deposito è 1.00");
+  } else if ( amount>getBalance()){
+    throw new AmountException("Importo maggiore del saldo disponibile");
+  }
+  else
+    {double newBalance = balance - amount;
+    setBalance(newBalance);
+    DataSource.updateAccountBalance(id, newBalance);
+  }
 }
 }

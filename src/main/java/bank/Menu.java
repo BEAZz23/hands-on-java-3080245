@@ -2,6 +2,7 @@ package bank;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+import bank.exceptions.AmountException;
 
 import javax.security.auth.login.LoginException;
 
@@ -41,7 +42,7 @@ public class Menu {
 try{
     customer= Authenticator.login(username, password);}
    catch (LoginException e) {
-     System.out.println("Ci scusimao per il disagio, c'è stato un errore:" + 
+     System.out.println("Ci scusiamo per il disagio, c'è stato un errore:" + 
      e.getMessage());
    }
 return customer;
@@ -67,15 +68,23 @@ switch (selezione) {
   case 1:
     System.out.println("Quanto vuoi depositare?");
     amount=scanner.nextDouble();
-    account.deposit(amount);
+    try{account.deposit(amount);} catch(AmountException e)
+    {System.out.println(e.getMessage());
+      System.out.println("Riprova");
+    } 
     break;
   case 2:
   System.out.println("Quanto vuoi ritirare?");
     amount=scanner.nextDouble();
-    account.withdraw(amount);
-    break;
+    try {
+      account.withdraw(amount);
+    } catch (AmountException e) {
+      System.out.println(e.getMessage());
+      System.out.println("Riprova");
+    }
+break;
     case 3:
-      System.out.println("Saldo attuale"+ account.getBalance());
+      System.out.println("Saldo attuale "+ account.getBalance());
     break;
     case 4:
       Authenticator.logout(customer);
